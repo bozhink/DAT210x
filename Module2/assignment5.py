@@ -7,6 +7,17 @@ import numpy as np
 # Load up the dataset, setting correct header labels.
 #
 # .. your code here ..
+df = pd.read_csv('Datasets/census.data',
+                 header=None,
+                 names=[
+                     'education',
+                     'age',
+                     'capital-gain',
+                     'race',
+                     'capital-loss',
+                     'hours-per-week',
+                     'sex',
+                     'classification'])
 
 
 
@@ -24,6 +35,11 @@ import numpy as np
 # na_values when loading the dataframe.
 #
 # .. your code here ..
+df['age'] = pd.to_numeric(df['age'], errors='coerce')
+df['capital-gain'] = pd.to_numeric(df['capital-gain'], errors='coerce')
+df['capital-loss'] = pd.to_numeric(df['capital-loss'], errors='coerce')
+df['hours-per-week'] = pd.to_numeric(df['hours-per-week'], errors='coerce')
+
 
 
 
@@ -39,6 +55,34 @@ import numpy as np
 # for these somewhat ambigious features?
 #
 # .. your code here ..
+education = [
+    'Preschool',
+    '1st-4th',
+    '5th-6th',
+    '7th-8th',
+    '9th',
+    '10th',
+    '11th',
+    '12th',
+    'Some-college',
+    'HS-grad',
+    'Bachelors',
+    'Masters',
+    'Doctorate']
+
+df['education'] = df['education'].astype('category',
+                                         ordered=True,
+                                         categories=education
+                                        ).cat.codes
+
+
+classification = ['<=50K', '>50K']
+df['classification'] = df['classification'].astype('category',
+                                                   ordered=True,
+                                                   categories=classification
+                                                  ).cat.codes
+
+df = pd.get_dummies(df, columns=['sex', 'race'])
 
 
 
@@ -47,5 +91,5 @@ import numpy as np
 # Print out your dataframe
 #
 # .. your code here ..
-
+print df
 

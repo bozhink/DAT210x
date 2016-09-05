@@ -3,12 +3,17 @@ import pandas as pd
 # TODO: Load up the 'tutorial.csv' dataset
 #
 # .. your code here ..
+df = pd.read_csv('Datasets/tutorial.csv', sep=',')
 
 
 
 # TODO: Print the results of the .describe() method
 #
 # .. your code here ..
+print
+print df
+print
+print df.describe()
 
 
 
@@ -17,4 +22,6 @@ import pandas as pd
 # And print the results
 #
 # .. your code here ..
+print
+print df.loc[2:4,'col3']
 
