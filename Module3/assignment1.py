@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
@@ -10,6 +11,7 @@ matplotlib.style.use('ggplot')
 # It's located at 'Datasets/wheat.data'
 # 
 # .. your code here ..
+df = pd.read_csv('Datasets/wheat.data')
 
 
 #
@@ -17,6 +19,7 @@ matplotlib.style.use('ggplot')
 # that only includes the 'area' and 'perimeter' features
 # 
 # .. your code here ..
+s1 = df.loc[:, ['area', 'perimeter']]
 
 
 #
@@ -24,6 +27,7 @@ matplotlib.style.use('ggplot')
 # that only includes the 'groove' and 'asymmetry' features
 # 
 # .. your code here ..
+s2 = df.loc[:, ['groove', 'asymmetry']]
 
 
 #
@@ -33,6 +37,7 @@ matplotlib.style.use('ggplot')
 # 
 # .. your code here ..
 
-
+s1.plot.hist(alpha=0.75)
+s2.plot.hist(alpha=0.75)
 plt.show()
 
