@@ -32,7 +32,7 @@ labels = ['red' if i=='ckd' else 'green' for i in df.classification]
 #       ['bgr','wc','rc']
 #
 # .. your code here ..
-df = df.loc[:, ['bgr','wc','rc']]
+df.drop(['classification'], axis=1, inplace=True)
 
 
 
@@ -51,10 +51,14 @@ df = df.loc[:, ['bgr','wc','rc']]
 df.bgr = pd.to_numeric(df.bgr, errors='coerce')
 df.wc = pd.to_numeric(df.wc, errors='coerce')
 df.rc = pd.to_numeric(df.rc, errors='coerce')
+df.pcv = pd.to_numeric(df.pcv, errors='coerce')
 print df.shape
 
 df = df.dropna(axis=0)
 print df.shape
+
+df = pd.get_dummies(df, columns=['rbc', 'pc', 'pcc', 'ba', 'htn', 'dm', 'cad', 'appet', 'pe', 'ane'])
+
 print df.dtypes
 
 

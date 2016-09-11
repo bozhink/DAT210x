@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
@@ -40,8 +41,12 @@ def do_PCA(armadillo):
   # you automatically. =)
   #
   # .. your code here ..
+  from sklearn.decomposition import PCA
+  pca = PCA(n_components=2)
+  pca.fit(armadillo)
+  T = pca.transform(armadillo)
 
-  return None
+  return T
 
 
 def do_RandomizedPCA(armadillo):
@@ -58,8 +63,12 @@ def do_RandomizedPCA(armadillo):
   # you automatically. =)
   #
   # .. your code here ..
+  from sklearn.decomposition import RandomizedPCA
+  pca = RandomizedPCA(n_components=2)
+  pca.fit(armadillo)
+  T = pca.transform(armadillo)
 
-  return None
+  return T
 
 
 
@@ -70,13 +79,20 @@ ax.set_title('Armadillo 3D')
 ax.set_xlabel('X')
 ax.set_ylabel('Y')
 ax.set_zlabel('Z')
-ax.scatter(armadillo.x, armadillo.y, armadillo.z, c='green', marker='.', alpha=0.75)
+ax.scatter(armadillo.x,
+           armadillo.y,
+           armadillo.z,
+           c='green',
+           marker='.',
+           alpha=0.75)
 
 
 
 # Time the execution of PCA 5000x
 t1 = datetime.datetime.now()
-for i in range(5000): pca = do_PCA(armadillo)
+for i in range(5000):
+    pca = do_PCA(armadillo)
+
 time_delta = datetime.datetime.now() - t1
 
 # Render the newly transformed PCA armadillo!
@@ -84,13 +100,19 @@ if not pca is None:
   fig = plt.figure()
   ax = fig.add_subplot(111)
   ax.set_title('PCA, build time: ' + str(time_delta))
-  ax.scatter(pca[:,0], pca[:,1], c='blue', marker='.', alpha=0.75)
+  ax.scatter(pca[:,0],
+             pca[:,1],
+             c='blue',
+             marker='.',
+             alpha=0.75)
 
 
 
 # Time the execution of rPCA 5000x
 t1 = datetime.datetime.now()
-for i in range(5000): rpca = do_RandomizedPCA(armadillo)
+for i in range(5000):
+    rpca = do_RandomizedPCA(armadillo)
+
 time_delta = datetime.datetime.now() - t1
 
 # Render the newly transformed RandomizedPCA armadillo!
